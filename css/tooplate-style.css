@@ -116,7 +116,7 @@ position: relative;
 }
 
 .animated-item {
-color: #ffc200;
+color: #d8542f;
 }
 
 .animated-item {
@@ -458,7 +458,7 @@ background: #222222;
   margin-bottom: 0.5rem;
 }
 .contact-underline {
-  width: 1000px;
+  width: 75%;
   height: 2px;
   background-color: #474559;
   margin: 0.5rem auto 1rem;
@@ -545,7 +545,7 @@ padding: 3px 20px;
 }
 @media (max-width: 580px) {
 .animated-info {
-min-width: 350px;
+min-width: 250px;
 }
 .animated-item {
 font-size: 30px;
