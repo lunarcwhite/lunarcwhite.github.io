@@ -544,9 +544,7 @@ padding: 3px 20px;
 }
 }
 @media (max-width: 580px) {
-.animated-info {
-min-width: 70%;
-}
+
 .animated-item {
 font-size: 30px;
 }
