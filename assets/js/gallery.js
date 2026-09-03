@@ -1,23 +1,26 @@
 // BAE lightbox: klik gambar gallery/thumbs/diagram -> modal + zoom. No dependencies.
+// Zoom (tombol/wheel/cubit/dblclick) mengubah ukuran gambar itu sendiri
+// (properti zoom = layout ikut membesar, dialog bisa scroll), bukan transform.
 (function () {
-  var MIN = 1, MAX = 4, list = [], idx = 0, scale = 1, tx = 0, ty = 0;
+  var MIN = 1, MAX = 4, list = [], idx = 0, scale = 1;
   var dlg, img, cap, zin;
 
   function apply() {
-    img.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')';
+    img.style.zoom = scale;
     zin.textContent = Math.round(scale * 100) + '%';
-    img.style.cursor = scale > 1 ? 'grab' : 'zoom-in';
+    img.style.cursor = scale > 1 ? 'zoom-out' : 'zoom-in';
   }
   function show(i) {
     idx = (i + list.length) % list.length;
     img.src = list[idx].src;
     img.alt = list[idx].alt || '';
     cap.textContent = list[idx].alt || '';
-    scale = 1; tx = 0; ty = 0;
+    scale = 1;
     apply();
+    dlg.scrollTop = 0; dlg.scrollLeft = 0;
   }
   function open(i) { show(i); if (!dlg.open) dlg.showModal(); }
-  function zoom(f) { scale = Math.min(MAX, Math.max(MIN, scale * f)); if (scale === 1) { tx = 0; ty = 0; } apply(); }
+  function zoom(f) { scale = Math.min(MAX, Math.max(MIN, scale * f)); apply(); }
 
   document.addEventListener('DOMContentLoaded', function () {
     list = Array.prototype.slice.call(
@@ -52,7 +55,12 @@
       var z = e.target.closest('[data-z]');
       if (z) {
         zoom(z.dataset.z === 'in' ? 1.4 : z.dataset.z === 'out' ? 1 / 1.4 : 0);
-        if (z.dataset.z === 'reset') { scale = 1; tx = 0; ty = 0; apply(); }
+        if (z.dataset.z === 'reset') { scale = 1; apply(); }
+        return;
+      }
+      if (e.target === img) { // klik gambar: perbesar, klik lagi: kembali
+        if (scale === 1) { scale = 2.5; } else { scale = 1; }
+        apply();
         return;
       }
       if (e.target.closest('.lb-x')) { dlg.close(); return; }
@@ -68,22 +76,31 @@
       e.preventDefault();
       zoom(e.deltaY < 0 ? 1.2 : 1 / 1.2);
     }, { passive: false });
-    img.addEventListener('dblclick', function () {
-      scale = scale === 1 ? 2.5 : 1; tx = 0; ty = 0; apply();
-    });
-    // drag to pan saat zoom
-    var sx, sy, drag = false;
-    img.addEventListener('pointerdown', function (e) {
-      if (scale === 1) return;
-      drag = true; sx = e.clientX - tx; sy = e.clientY - ty;
-      img.setPointerCapture(e.pointerId);
-      img.style.cursor = 'grabbing';
-    });
-    img.addEventListener('pointermove', function (e) {
-      if (drag) { tx = e.clientX - sx; ty = e.clientY - sy; apply(); }
-    });
-    ['pointerup', 'pointercancel'].forEach(function (ev) {
-      img.addEventListener(ev, function () { drag = false; apply(); });
+    // pinch dua jari (touch): cubit = gambar membesar/mengecil di tempat
+    var pinchD = 0, pinchS = 1;
+    function pinchDist(e) {
+      return Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY);
+    }
+    var stage = dlg.querySelector('.lb-stage');
+    [stage, img].forEach(function (t) {
+      t.addEventListener('touchstart', function (e) {
+        if (e.touches.length === 2) {
+          e.preventDefault();
+          pinchD = pinchDist(e); pinchS = scale;
+        }
+      }, { passive: false });
+      t.addEventListener('touchmove', function (e) {
+        if (e.touches.length === 2 && pinchD > 0) {
+          e.preventDefault();
+          scale = Math.min(MAX, Math.max(MIN, pinchS * pinchDist(e) / pinchD));
+          apply();
+        }
+      }, { passive: false });
+      t.addEventListener('touchend', function (e) {
+        if (e.touches.length < 2) pinchD = 0;
+      });
     });
   });
 })();

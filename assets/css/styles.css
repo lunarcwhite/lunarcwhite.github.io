@@ -65,7 +65,7 @@ nav.links a:hover { color: var(--gold-soft); }
 .gallery img:hover { transform: scale(1.03); }
 .thumbs img, .diagram-strip img { cursor: zoom-in; }
 /* Lightbox */
-.lightbox { border: 0; padding: 0; border-radius: 12px; background: #17100a; color: #fff; max-width: min(92vw, 1000px); width: max-content; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0; }
+.lightbox { border: 0; padding: 0; border-radius: 12px; background: #17100a; color: #fff; max-width: 95vw; max-height: 95vh; overflow: auto; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0; }
 .lightbox::backdrop { background: rgba(0,0,0,.75); }
 .lb-bar { display: flex; align-items: center; gap: 8px; padding: 10px 12px; }
 .lb-cap { flex: 1; font-size: .9rem; opacity: .85; }
@@ -73,8 +73,8 @@ nav.links a:hover { color: var(--gold-soft); }
 .lb-btn { background: #FCA743; color: #17100a; border: 0; border-radius: 8px; min-width: 36px; height: 32px; font-weight: 800; font-size: 1rem; cursor: pointer; padding: 0 10px; }
 .lb-btn:hover { background: #F9B780; }
 .lb-x { background: #FF6301; color: #fff; }
-.lb-stage { position: relative; display: flex; justify-content: center; align-items: center; overflow: hidden; max-height: 76vh; }
-.lb-stage img { max-width: 92vw; max-height: 76vh; object-fit: contain; touch-action: none; }
+.lb-stage { position: relative; display: flex; justify-content: center; align-items: center; overflow: visible; max-height: none; touch-action: none; overscroll-behavior: contain; }
+.lb-stage img { max-width: 88vw; max-height: 70vh; object-fit: contain; touch-action: none; transform-origin: center center; }
 .lb-prev, .lb-next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(252,167,67,.9); color: #17100a; border: 0; border-radius: 50%; width: 44px; height: 44px; font-size: 1.5rem; cursor: pointer; }
 .lb-prev { left: 12px; } .lb-next { right: 12px; }
 .lb-prev:hover, .lb-next:hover { background: #F9B780; }
@@ -113,4 +113,13 @@ table.spec td.todo { color: #9aa3ad; font-style: italic; }
   .nav .btn-gold { display: none; }
   .hero { padding: 70px 0 60px; }
   .hero h1 { font-size: 1.9rem; }
+  .prod-head img.main { height: 220px; }
+  /* Tabel spek jadi kartu label-atas-nilai (tanpa scroll horizontal) */
+  table.spec { min-width: 0; }
+  table.spec thead { display: none; }
+  table.spec, table.spec tbody, table.spec tr, table.spec td { display: block; width: 100%; }
+  table.spec tr { padding: 8px 0; border-bottom: 2px solid var(--line); }
+  table.spec tr:last-child { border-bottom: 0; }
+  table.spec td { border-bottom: 0; padding: 2px 14px; }
+  table.spec td:first-child { font-weight: 800; color: #B64A00; }
 }
