@@ -1,13 +1,14 @@
-/* BAE - Biovet Agriculture Equipment */
+/* BAE - Biovet Agriculture Equipment — palette orange */
 :root {
-  --navy: #0e2a47;
-  --navy-dark: #0a1e33;
-  --gold: #c9a227;
-  --gold-soft: #e3c964;
-  --cream: #f7f4ec;
-  --ink: #1c2733;
-  --muted: #5d6b7a;
-  --line: #e4ddcd;
+  --navy: #FF6301;
+  --navy-dark: #8F3200; /* ponytail: orange tua = #FF6301 digelapkan demi kontras teks putih; naikkan ke #FF6301 bila header ingin flat sesuai hex persis */
+  --gold: #FCA743;
+  --gold-soft: #F9B780;
+  --accent: #FC8F43;
+  --cream: #FDFDF8;
+  --ink: #33241A;
+  --muted: #8A7360;
+  --line: #FBE1C0;
   --white: #fff;
   --radius: 14px;
   --max: 1140px;
@@ -21,7 +22,7 @@ section { padding: 64px 0; }
 h1, h2, h3 { line-height: 1.25; color: var(--navy-dark); }
 h2 { font-size: 2rem; margin-bottom: 8px; }
 .sec-sub { color: var(--muted); margin-bottom: 32px; max-width: 640px; }
-.eyebrow { display: inline-block; font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #8a6d1a; margin-bottom: 10px; }
+.eyebrow { display: inline-block; font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #B64A00; margin-bottom: 10px; }
 header { position: sticky; top: 0; z-index: 50; background: var(--navy-dark); color: var(--white); }
 .nav { display: flex; align-items: center; gap: 20px; height: 68px; }
 .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; text-decoration: none; color: var(--white); }
@@ -54,23 +55,41 @@ nav.links a:hover { color: var(--gold-soft); }
 .card-body { padding: 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
 .card-body h3 { font-size: 1.2rem; }
 .card-body p { color: var(--muted); font-size: .95rem; flex: 1; }
-.card-link { font-weight: 700; color: #8a6d1a; text-decoration: none; }
+.card-link { font-weight: 700; color: #B64A00; text-decoration: none; }
 .type-card img { height: 260px; }
 .dark-sec { background: var(--navy-dark); color: var(--white); }
 .dark-sec h2 { color: var(--white); }
-.dark-sec .sec-sub { color: #c3ccd6; }
+.dark-sec .sec-sub { color: #FBE1C0; }
 .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-.gallery img { border-radius: 10px; height: 180px; width: 100%; object-fit: cover; }
+.gallery img { border-radius: 10px; height: 180px; width: 100%; object-fit: cover; cursor: zoom-in; transition: transform .2s; }
+.gallery img:hover { transform: scale(1.03); }
+.thumbs img, .diagram-strip img { cursor: zoom-in; }
+/* Lightbox */
+.lightbox { border: 0; padding: 0; border-radius: 12px; background: #17100a; color: #fff; max-width: min(92vw, 1000px); width: max-content; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0; }
+.lightbox::backdrop { background: rgba(0,0,0,.75); }
+.lb-bar { display: flex; align-items: center; gap: 8px; padding: 10px 12px; }
+.lb-cap { flex: 1; font-size: .9rem; opacity: .85; }
+.lb-zoom { font-size: .85rem; opacity: .7; min-width: 44px; text-align: right; }
+.lb-btn { background: #FCA743; color: #17100a; border: 0; border-radius: 8px; min-width: 36px; height: 32px; font-weight: 800; font-size: 1rem; cursor: pointer; padding: 0 10px; }
+.lb-btn:hover { background: #F9B780; }
+.lb-x { background: #FF6301; color: #fff; }
+.lb-stage { position: relative; display: flex; justify-content: center; align-items: center; overflow: hidden; max-height: 76vh; }
+.lb-stage img { max-width: 92vw; max-height: 76vh; object-fit: contain; touch-action: none; }
+.lb-prev, .lb-next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(252,167,67,.9); color: #17100a; border: 0; border-radius: 50%; width: 44px; height: 44px; font-size: 1.5rem; cursor: pointer; }
+.lb-prev { left: 12px; } .lb-next { right: 12px; }
+.lb-prev:hover, .lb-next:hover { background: #F9B780; }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; align-items: start; }
 .contact-list { list-style: none; display: grid; gap: 12px; margin-top: 16px; }
-.contact-list a { color: var(--navy); font-weight: 600; }
-footer { background: var(--navy-dark); color: #c3ccd6; padding: 34px 0; font-size: .92rem; }
+.contact-list a { color: #B64A00; font-weight: 600; }
+.dark-sec .contact-list { color: #FBE1C0; }
+.dark-sec .contact-list a { color: #F9B780; }
+footer { background: var(--navy-dark); color: #FBE1C0; padding: 34px 0; font-size: .92rem; }
 footer .wrap { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
 footer a { color: var(--gold-soft); text-decoration: none; }
 .wa-float { position: fixed; right: 20px; bottom: 20px; width: 58px; height: 58px; border-radius: 50%; background: #25d366; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 18px rgba(0,0,0,.3); z-index: 60; }
 .wa-float svg { width: 30px; height: 30px; fill: #fff; }
-.table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); }
-table.spec { width: 100%; border-collapse: collapse; min-width: 560px; font-size: .93rem; }
+.table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); color: var(--ink); }
+table.spec { width: 100%; border-collapse: collapse; min-width: 560px; font-size: .93rem; background: var(--white); color: var(--ink); }
 table.spec th, table.spec td { padding: 12px 14px; border-bottom: 1px solid var(--line); text-align: left; }
 table.spec thead th { background: var(--navy); color: var(--white); }
 table.spec td.todo { color: #9aa3ad; font-style: italic; }
@@ -80,10 +99,13 @@ table.spec td.todo { color: #9aa3ad; font-style: italic; }
 .thumbs img { border-radius: 8px; height: 90px; width: 100%; object-fit: cover; }
 .diagram-strip { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .diagram-strip img { border-radius: var(--radius); border: 1px solid var(--line); }
+.feat { display: grid; gap: 8px; margin: 0 0 30px; padding-left: 22px; }
+.feat li::marker { color: #B64A00; font-weight: 800; }
 @media (max-width: 900px) {
   h2 { font-size: 1.6rem; }
   .grid-3, .grid-2, .contact-grid, .prod-head, .diagram-strip { grid-template-columns: 1fr; }
   .gallery { grid-template-columns: repeat(2, 1fr); }
+  .thumbs { grid-template-columns: repeat(2, 1fr); }
   .stats-row { grid-template-columns: repeat(2, 1fr); }
   nav.links { display: none; position: absolute; top: 68px; left: 0; right: 0; background: var(--navy-dark); flex-direction: column; padding: 12px 20px 20px; gap: 12px; }
   nav.links.open { display: flex; }
