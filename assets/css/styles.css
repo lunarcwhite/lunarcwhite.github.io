@@ -67,7 +67,7 @@ nav.links a:hover { color: var(--gold-soft); }
 /* Lightbox */
 .lightbox { border: 0; padding: 0; border-radius: 12px; background: #17100a; color: #fff; max-width: 95vw; max-height: 95vh; overflow: auto; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0; }
 .lightbox::backdrop { background: rgba(0,0,0,.75); }
-.lb-bar { display: flex; align-items: center; gap: 8px; padding: 10px 12px; }
+.lb-bar { display: flex; align-items: center; gap: 8px; padding: 10px 12px; position: sticky; top: 0; background: #17100a; z-index: 2; }
 .lb-cap { flex: 1; font-size: .9rem; opacity: .85; }
 .lb-zoom { font-size: .85rem; opacity: .7; min-width: 44px; text-align: right; }
 .lb-btn { background: #FCA743; color: #17100a; border: 0; border-radius: 8px; min-width: 36px; height: 32px; font-weight: 800; font-size: 1rem; cursor: pointer; padding: 0 10px; }

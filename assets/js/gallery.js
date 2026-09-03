@@ -1,14 +1,15 @@
 // BAE lightbox: klik gambar gallery/thumbs/diagram -> modal + zoom. No dependencies.
-// Zoom (tombol/wheel/cubit/dblclick) mengubah ukuran gambar itu sendiri
+// Zoom (tombol/wheel/cubit/klik) mengubah ukuran gambar itu sendiri
 // (properti zoom = layout ikut membesar, dialog bisa scroll), bukan transform.
+// Geser: satu jari (touch) atau seret mouse (desktop) menggeser dialog.
 (function () {
   var MIN = 1, MAX = 4, list = [], idx = 0, scale = 1;
-  var dlg, img, cap, zin;
+  var dlg, img, cap, zin, tmove = false; // tmove: tap habis geser diabaikan
 
   function apply() {
     img.style.zoom = scale;
     zin.textContent = Math.round(scale * 100) + '%';
-    img.style.cursor = scale > 1 ? 'zoom-out' : 'zoom-in';
+    img.style.cursor = scale > 1 ? 'grab' : 'zoom-in';
   }
   function show(i) {
     idx = (i + list.length) % list.length;
@@ -58,7 +59,8 @@
         if (z.dataset.z === 'reset') { scale = 1; apply(); }
         return;
       }
-      if (e.target === img) { // klik gambar: perbesar, klik lagi: kembali
+      if (e.target === img) { // tap gambar: perbesar / kembali
+        if (tmove) { tmove = false; return; } // abaikan tap habis geser
         if (scale === 1) { scale = 2.5; } else { scale = 1; }
         apply();
         return;
@@ -76,8 +78,56 @@
       e.preventDefault();
       zoom(e.deltaY < 0 ? 1.2 : 1 / 1.2);
     }, { passive: false });
-    // pinch dua jari (touch): cubit = gambar membesar/mengecil di tempat
-    var pinchD = 0, pinchS = 1;
+    // geser satu jari (touch): pan dialog saat gambar membesar.
+    // Bar atas sticky jadi tombol tetap terlihat saat digeser.
+    // Tap tanpa gerak = perbesar/kembali; tap habis geser diabaikan.
+    var tsx = 0, tsy = 0, tsl = 0, tst = 0;
+    img.addEventListener('touchstart', function (e) {
+      if (e.touches.length === 1 && scale > 1) {
+        tmove = false;
+        tsx = e.touches[0].clientX; tsy = e.touches[0].clientY;
+        tsl = dlg.scrollLeft; tst = dlg.scrollTop;
+      }
+    }, { passive: true });
+    img.addEventListener('touchmove', function (e) {
+      if (e.touches.length === 1 && scale > 1) {
+        var dx = e.touches[0].clientX - tsx, dy = e.touches[0].clientY - tsy;
+        if (Math.abs(dx) + Math.abs(dy) > 10) tmove = true;
+        if (tmove) {
+          e.preventDefault();
+          dlg.scrollLeft = tsl - dx;
+          dlg.scrollTop = tst - dy;
+        }
+      }
+    }, { passive: false });
+    img.addEventListener('touchend', function () { /* tap di-handle klik */ });
+    // seret mouse (desktop): pan dialog saat gambar membesar.
+    // Klik tanpa gerak = perbesar/kembali; klik habis seret diabaikan (via tmove).
+    var msx = 0, msy = 0, msl = 0, mst = 0, mdrag = false;
+    img.addEventListener('mousedown', function (e) {
+      if (scale > 1 && e.button === 0) {
+        mdrag = true; tmove = false;
+        msx = e.clientX; msy = e.clientY;
+        msl = dlg.scrollLeft; mst = dlg.scrollTop;
+        img.style.cursor = 'grabbing';
+      }
+    });
+    img.addEventListener('mousemove', function (e) {
+      if (mdrag && scale > 1) {
+        var dx = e.clientX - msx, dy = e.clientY - msy;
+        if (Math.abs(dx) + Math.abs(dy) > 5) tmove = true;
+        if (tmove) {
+          dlg.scrollLeft = msl - dx;
+          dlg.scrollTop = mst - dy;
+        }
+      }
+    });
+    ['mouseup', 'mouseleave'].forEach(function (ev) {
+      img.addEventListener(ev, function () {
+        mdrag = false;
+        if (scale > 1) img.style.cursor = 'grab';
+      });
+    });
     function pinchDist(e) {
       return Math.hypot(
         e.touches[0].clientX - e.touches[1].clientX,
