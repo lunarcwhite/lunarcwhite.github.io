@@ -9,14 +9,14 @@
 
 ## Statistik pengunjung (Cloudflare Web Analytics — SUDAH AKTIF)
 
-Beacon terpasang di `index.html` + `assets/pages/produk.html`.
+Beacon terpasang di `index.html` + `pages/produk.html`.
 Lihat data di `dash.cloudflare.com` → **Web Analytics** (harian/mingguan, halaman populer).
 Tanpa cookie banner, gratis.
 
 ## Google Analytics 4 (OPSIONAL, lebih detail: sumber WA/IG, HP vs desktop)
 
 1. Daftar `analytics.google.com` → buat properti → copy **Measurement ID** (`G-...`).
-2. Di `index.html` + `assets/pages/produk.html`: uncomment blok GA4, ganti `G-XXXXXXXXXX` (2 tempat per file).
+2. Di `index.html` + `pages/produk.html`: uncomment blok GA4, ganti `G-XXXXXXXXXX` (2 tempat per file).
 3. Commit + push. Lihat di **Reports → Realtime / Traffic acquisition**.
 
 ## Terindex Google (BELUM — butuh 15 menit + tunggu 1-14 hari)
