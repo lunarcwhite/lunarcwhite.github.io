@@ -1,59 +1,37 @@
-# Website BAE online 100% gratis
+# Website BAE — status & cara kelola
 
-## 1. Hosting: Cloudflare Pages (±10 menit)
+## Status (2026-09-04): SUDAH ONLINE
 
-1. Daftar di `dash.cloudflare.com` (gratis, cuma email).
-2. Menu **Workers & Pages → Create → Pages → Upload assets**.
-3. Nama project mis. `bae` → alamat jadi `https://bae.pages.dev`.
-4. Upload **isi folder `bae-site`** (file `index.html`, `robots.txt`, `sitemap.xml`, folder `assets`).
-5. Setiap update: upload ulang / drag-and-drop lagi.
+- Hosting: **GitHub Pages**, repo `lunarcwhite/lunarcwhite.github.io`, branch `main`
+- Live di: `https://lunarcwhite.github.io/` dan `https://poultry-equipment.biz.id/`
+- File `CNAME` berisi `poultry-equipment.biz.id` — JANGAN dihapus, kalau hilang domain custom lepas
+- Cara update: edit file → `git add -A` → `git commit -m "..."` → `git push` → live ±1 menit
 
-Lazier alternative: `app.netlify.com/drop` — drag folder, langsung online tanpa akun dulu.
+## Statistik pengunjung (Cloudflare Web Analytics — SUDAH AKTIF)
 
-## 2. Ganti domain sementara (wajib, 5 menit)
+Beacon terpasang di `index.html` + `assets/pages/produk.html`.
+Lihat data di `dash.cloudflare.com` → **Web Analytics** (harian/mingguan, halaman populer).
+Tanpa cookie banner, gratis.
 
-Semua tulisan `GANTI-DOMAIN.pages.dev` ganti dengan alamat aslimu:
+## Google Analytics 4 (OPSIONAL, lebih detail: sumber WA/IG, HP vs desktop)
 
-- `robots.txt` → baris `Sitemap:`
-- `sitemap.xml` → 2 baris `<loc>`
-- `index.html` → `canonical` + `og:image`
-- `assets/pages/produk.html` → `canonical` + `og:image`
-
-Cari `GANTI-DOMAIN` di semua file (VS Code: Ctrl+Shift+F), replace all.
-
-## 3. Statistik pengunjung (pilih 1, gratis)
-
-**A. Cloudflare Web Analytics (paling malas, tanpa cookie banner):**
-1. Di dashboard Cloudflare → **Web Analytics → Add site** → masukkan `bae.pages.dev`.
-2. Copy **token** → di `index.html` + `produk.html` hapus `<!--` `-->` di blok Cloudflare, ganti `GANTI-TOKEN`.
-3. Lihat pengunjung di dashboard Cloudflare (harian/mingguan, halaman populer).
-
-**B. Google Analytics 4 (lebih detail: sumber WA/IG, HP vs desktop):**
 1. Daftar `analytics.google.com` → buat properti → copy **Measurement ID** (`G-...`).
-2. Di `index.html` + `produk.html` aktifkan blok GA4, ganti `G-XXXXXXXXXX` (2 tempat per file).
-3. Lihat di **Reports → Realtime / Traffic acquisition**.
+2. Di `index.html` + `assets/pages/produk.html`: uncomment blok GA4, ganti `G-XXXXXXXXXX` (2 tempat per file).
+3. Commit + push. Lihat di **Reports → Realtime / Traffic acquisition**.
 
-Boleh pasang dua-duanya.
+## Terindex Google (BELUM — butuh 15 menit + tunggu 1-14 hari)
 
-## 4. Terindex Google (±15 menit + tunggu 1-14 hari)
-
-1. Buka `search.google.com/search-console` → tambah properti URL `https://bae.pages.dev`.
-2. Verifikasi: pilih metode **tag HTML** → tempel tag di `<head>` kedua file → upload ulang → klik Verify.
-3. Menu **Sitemaps → Add sitemap** → isi `sitemap.xml` → Submit.
+1. Buka `search.google.com/search-console` → tambah properti URL `https://poultry-equipment.biz.id/`.
+2. Verifikasi: metode **tag HTML** → tempel tag di `<head>` kedua file → commit + push → klik Verify.
+3. **Sitemaps → Add sitemap** → isi `sitemap.xml` → Submit.
 4. Cek 3-7 hari kemudian di Search Console → Pages: berapa halaman terindex.
-5. Tes cepat kapan saja: di Google ketik `site:bae.pages.dev`.
-
-## 5. Kalau nanti beli domain (.com ~Rp150rb/th)
-
-1. Beli di Cloudflare Registrar / Niagahoster.
-2. Cloudflare Pages → **Custom domains → Setup** → ikut wizard (DNS otomatis).
-3. Ulangi langkah 2 (ganti domain) + daftarkan domain baru ke Search Console + GA4.
-4. Domain lama `pages.dev` tetap jalan dan redirect otomatis — tidak perlu hapus.
+5. Tes cepat kapan saja: di Google ketik `site:poultry-equipment.biz.id`.
 
 ## Checklist
 
-- [ ] Upload ke Cloudflare Pages → dapat URL
-- [ ] Replace `GANTI-DOMAIN` di 4 file
-- [ ] Aktifkan 1 statistik (Cloudflare atau GA4)
+- [x] Online via GitHub Pages + domain custom
+- [x] `robots.txt` + `sitemap.xml` menunjuk domain benar
+- [x] Cloudflare Web Analytics aktif
+- [ ] GA4 (opsional)
 - [ ] Daftar Search Console + submit `sitemap.xml`
-- [ ] Tunggu index, cek `site:domain-kamu`
+- [ ] Tunggu index, cek `site:poultry-equipment.biz.id`
