@@ -107,6 +107,9 @@ table.spec td.todo { color: #9aa3ad; font-style: italic; }
 .diagram-strip img { border-radius: var(--radius); border: 1px solid var(--line); }
 .feat { display: grid; gap: 8px; margin: 0 0 30px; padding-left: 22px; }
 .feat li::marker { color: #B64A00; font-weight: 800; }
+#faq details { border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); margin-bottom: 10px; }
+#faq summary { cursor: pointer; padding: 14px 18px; font-weight: 700; color: #8F3200; }
+#faq details p { padding: 0 18px 16px; margin: 0; color: var(--muted); }
 @media (max-width: 900px) {
   h2 { font-size: 1.6rem; }
   .grid-3, .grid-2, .contact-grid, .prod-head, .diagram-strip { grid-template-columns: 1fr; }
