@@ -107,6 +107,18 @@ table.spec td.todo { color: #9aa3ad; font-style: italic; }
 .diagram-strip img { border-radius: var(--radius); border: 1px solid var(--line); }
 .feat { display: grid; gap: 8px; margin: 0 0 30px; padding-left: 22px; }
 .feat li::marker { color: #B64A00; font-weight: 800; }
+/* Artikel panduan */
+.art .wrap { max-width: 760px; }
+.art h1 { font-size: 2rem; margin: 8px 0 18px; }
+.art h2 { font-size: 1.4rem; margin: 30px 0 10px; }
+.art p, .art ul { margin-bottom: 14px; }
+.art ul { padding-left: 22px; }
+.art .crumb { color: var(--muted); font-size: .9rem; margin-bottom: 6px; }
+.art .crumb a { color: #B64A00; text-decoration: none; }
+.art img.main { border-radius: var(--radius); margin-bottom: 24px; width: 100%; max-height: 420px; object-fit: cover; }
+.art .back { margin-top: 34px; }
+.art-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+@media (max-width: 900px) { .art-grid { grid-template-columns: 1fr; } }
 #faq details { border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); margin-bottom: 10px; }
 #faq summary { cursor: pointer; padding: 14px 18px; font-weight: 700; color: #8F3200; }
 #faq details p { padding: 0 18px 16px; margin: 0; color: var(--muted); }
