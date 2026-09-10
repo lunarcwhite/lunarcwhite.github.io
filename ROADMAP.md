@@ -47,10 +47,15 @@ Enam pilar yang masuk roadmap ini: **SEO, ads, update konten, 3 bahasa (ID/EN/ZH
 ## Fase 3 — SEO 3 bahasa (pemilik: dev, ±0,5 hari, setelah Fase 1)
 
 - [ ] RankMath + Polylang: judul/deskripsi per bahasa, sitemap per bahasa otomatis, hreflang ID/EN/ZH otomatis, OG locale (`id_ID`, `en_US`, `zh_CN`), schema Article/FAQ/Product
-- [ ] Pemetaan kata kunci awal (contoh, kembangkan dari data GSC nanti):
-  - ID: kandang ayam otomatis, kandang ayam petelur, kandang tipe H
-  - EN: automatic chicken cage, layer cage, type H cage
-  - ZH: menunda riset keyword sampai ada trafik ZH (terjemahkan halaman dulu, optimasi menyusul)
+- [x] Nama resmi (LOCKED 2026-09-10, disetujui BAE): **Biovet Agriculture Equipment Indonesia (BAE)**. Alias schema `alternateName`: `BAE Farming Poultry Equipment`, `BAE Poultry Farm`, `BAE - Biovet Agriculture Equipment`
+- [ ] Kata kunci BRAND — wajib posisi 1 (tulis verbatim di judul beranda, footer, seksi kontak, schema `alternateName`):
+  - `BAE Farming Poultry Equipment`, `Biovet Agriculture Equipment Indonesia`, `BAE Poultry Farm`
+  - Nama resmi dipakai konsisten di semua judul/footer/schema; alias muncul verbatim min. 1x di beranda + kontak — jangan tiga-tiganya jadi judul bergantian
+- [ ] Pemetaan kata kunci awal (kembangkan dari data GSC nanti):
+  - ID: kandang ayam otomatis, kandang ayam petelur, kandang tipe H + 3 varian brand di atas
+  - EN: automatic chicken cage, layer cage, type H cage + varian brand (ejaan sama, brand tidak diterjemahkan)
+  - ZH: riset keyword ditunda sampai ada trafik ZH; varian brand latin dipakai apa adanya
+- [ ] Konsistensi NAP + profil: nama, WA, IG/YouTube/FB sama persis di footer, halaman kontak, schema Organization `sameAs`, dan bio sosmed — Google memvalidasi brand dari kecocokan ini
 - [ ] Search Console: submit `/sitemap_index.xml`, minta index ulang URL utama, monitor Coverage 7 hari per direktori bahasa (`/`, `/en/`, `/zh/`)
 - [ ] Selesai bila: sitemap Success, URL baru terindex, URL `.html` lama hilang dari hasil, tidak ada hreflang error
 
