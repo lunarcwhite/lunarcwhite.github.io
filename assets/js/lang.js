@@ -12,6 +12,7 @@
       b.classList.toggle('active', b.dataset.lang === lang);
     });
     try { localStorage.setItem(KEY, lang); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('bae:lang', { detail: lang })); } catch (e) {}
   }
   var saved = 'id';
   try { saved = localStorage.getItem(KEY) || 'id'; } catch (e) {}

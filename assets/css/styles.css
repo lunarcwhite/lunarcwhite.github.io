@@ -122,6 +122,21 @@ table.spec td.todo { color: #9aa3ad; font-style: italic; }
 #faq details { border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); margin-bottom: 10px; }
 #faq summary { cursor: pointer; padding: 14px 18px; font-weight: 700; color: #8F3200; }
 #faq details p { padding: 0 18px 16px; margin: 0; color: var(--muted); }
+/* Equipment grid 9 SKU + studi kasus: pakai .grid-3/.card existing */
+.card-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 4px; }
+.case-meta { list-style: none; padding: 0; margin: 0 0 4px; display: grid; gap: 6px; font-size: .93rem; color: var(--muted); }
+.case-meta strong { color: var(--ink); }
+/* Blok inquiry: form -> link WA prefill (ponytail: ganti form WP sungguhan saat migrasi Fase 1; ceiling = prefill WA, upgrade = plugin form + event GA4) */
+.inquiry { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; margin-top: 26px; }
+.inquiry h3 { margin-bottom: 6px; }
+.inquiry p { color: var(--muted); font-size: .95rem; margin-bottom: 14px; }
+.inquiry-form { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.inquiry-form input, .inquiry-form select { padding: 11px 12px; border: 1px solid var(--line); border-radius: 10px; font: inherit; color: var(--ink); background: var(--cream); width: 100%; }
+.dark-sec .inquiry { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.25); }
+.dark-sec .inquiry p { color: #FBE1C0; }
+.dark-sec .inquiry-form input, .dark-sec .inquiry-form select { background: var(--white); }
+@media (max-width: 900px) {
+  .inquiry-form { grid-template-columns: 1fr; }
 @media (max-width: 900px) {
   h2 { font-size: 1.6rem; }
   .grid-3, .grid-2, .contact-grid, .prod-head, .diagram-strip { grid-template-columns: 1fr; }
